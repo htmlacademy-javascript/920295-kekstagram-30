@@ -1,0 +1,18 @@
+function checkLeng(string, length) {
+  return string.length <= length;
+}
+
+// eslint-disable-next-line no-console
+console.log(checkLeng('пример',3));
+// eslint-disable-next-line no-console
+console.log(checkLeng('пример',7));
+
+function isPalindrome(string) {
+  return string === string.split('').reverse().join('');
+}
+// eslint-disable-next-line no-console
+console.log(isPalindrome('потоп'));
+// eslint-disable-next-line no-console
+console.log(isPalindrome('Кекс'));
+
+
