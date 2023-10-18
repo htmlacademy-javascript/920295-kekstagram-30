@@ -15,4 +15,3 @@ console.log(isPalindrome('потоп'));
 // eslint-disable-next-line no-console
 console.log(isPalindrome('Кекс'));
 
-
