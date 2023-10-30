@@ -25,15 +25,15 @@ const DESCRIPTIONS = [
 const NAMES = ['Дмитрий', 'Александр', 'Ильшат', 'Артём','Константин', 'Лера'];
 const generateCommentId = createIdGenerator();
 
-const createMesasge = () => Array.from(
+const createMessage = () => Array.from(
   {length : getRandomInteger(1,2)},
   () => getRandomArrayElement(COMMENTS_LINES),
 ).join('');
 
 const createComment = () => ({
   id:generateCommentId(),
-  avatar: img/avtar-${getRandomInteger(1, AVATAR_COUNT)}.svg,
-  message: createMesasge(),
+  avatar: `img/avatar-${getRandomInteger(1, AVATAR_COUNT)}.svg`,
+  message: createMessage(),
   name: getRandomArrayElement(NAMES),
 
 });
