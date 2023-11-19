@@ -29,15 +29,15 @@ const createComment = ({avatar, message, name}) => {
 
 const renderComments = () => {
   commentsCountShown += COMMENT_COUNT_SHOW;
- if(commentsCountShown >= comments.length) {
-  commentsLoaderElement.classList.add('hidden');
-  commentsCountShown = comments.length;
- }
- else {
-  commentsLoaderElement.classList.remove('hidden');
+  if(commentsCountShown >= comments.length) {
+    commentsLoaderElement.classList.add('hidden');
+    commentsCountShown = comments.length;
+  }
+  else {
+    commentsLoaderElement.classList.remove('hidden');
  }
  const fragment = document.createDocumentFragment();
- for(let i = 0; i< commentsCountShown; i++) {
+  for(let i = 0; i< commentsCountShown; i++) {
   const comment = createComment(comments[i]);
   fragment.append(comment);
  }
