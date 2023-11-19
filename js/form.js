@@ -3,6 +3,8 @@ import {
   init as initEffect,
   reset as resetEffect
 } from './effect.js';
+import { sendPicture } from './api.js';
+import { showSuccesMessage, showErrorMessage } from './message.js';
 
 const MAX_HASHTAG_COUNT = 5;
 const VALID_SYMBOLS = /^#[a-za-яё0-9]{1,19}$/i;
@@ -12,6 +14,11 @@ const ErroText = {
   INVALID_PATTERN : 'Неправильный хэштег',
 };
 
+const SubmitButtonCaption = {
+  SUBMITTING: 'Отправляю...',
+  IDLE:'Опубликовать',
+};
+
 const body = document.querySelector('body');
 const form = document.querySelector('.img-upload__form');
 const overlay = form.querySelector('.img-upload__overlay');
@@ -19,6 +26,14 @@ const cancelButton = form.querySelector('.img-upload__cancel');
 const fileField = form.querySelector('.img-upload__input');
 const hashtagField = form.querySelector('.text__hashtags');
 const commentField = form.querySelector('.text__description');
+const submitButton = form.querySelector('.img-upload__submit');
+
+const toogleSubmitButton = (isDisabled) => {
+  submitButton.disabled = isDisabled;
+  submitButton.textContent = isDisabled
+    ? SubmitButtonCaption.SUBMITTING
+    : SubmitButtonCaption.IDLE;
+};
 
 const pristine = new Pristine(form, {
   classTo : 'img-upload__field-wrapper',
@@ -60,8 +75,11 @@ const hasUniqueTags = (value) => {
   const loverCaseTags = normalizeTags(value).map((tag) => tag.toLowerCase());
   return loverCaseTags.length === new Set(loverCaseTags).size;
 };
+
+const isErrorMessageExists = () => Boolean(document.querySelector('.error'));
 function onDocumentKeydown(evt) {
-  if(evt.key === 'Escape' && !isTextFieldFocused()) {
+
+  if(evt.key === 'Escape' && !isTextFieldFocused() && !isErrorMessageExists()) {
     evt.preventDefault();
     hideModal();
   }
@@ -75,9 +93,25 @@ const onFileInputChange = () => {
   showModal();
 };
 
+const sendForm = async (formElement) => {
+  if(!pristine.validate()) {
+    return;
+  }
+  try {
+    toogleSubmitButton(true);
+    await sendPicture(new FormData(formElement));
+    toogleSubmitButton(false);
+    hideModal();
+    showSuccesMessage();
+  } catch {
+    showErrorMessage();
+    toogleSubmitButton(false);
+  }
+};
+
 const onFormSubmit = (evt) => {
   evt.preventDefault();
-  pristine.validate();
+  sendForm(evt.target);
 };
 
 pristine.addValidator(
