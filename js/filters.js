@@ -36,7 +36,7 @@ const filterHandlers = {
 const repaint = (event, filter, data) => {
   const filteredData = filterHandlers[filter](data);
   const pictures = document.querySelectorAll('.picture');
-  pictures.forEach(item => item.remove());
+  pictures.forEach((item) => item.remove());
   renderGallery(filteredData);
   const currentActiveEl = filterForm.querySelector('.img-filters__button--active');
   currentActiveEl.classList.remove('img-filters__button--active');

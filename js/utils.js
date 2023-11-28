@@ -1,16 +1,16 @@
 const REMOVE_MESSAGE_TIMEOUT = 5000;
 const erroeMessageTemplate = document
-.querySelector('#data-error')
-.content
-.querySelector('.data-error');
+  .querySelector('#data-error')
+  .content
+  .querySelector('.data-error');
 
 const showErrorMessage = () => {
-const errorElement = erroeMessageTemplate.cloneNode(true);
-document.body.append(errorElement);
+  const errorElement = erroeMessageTemplate.cloneNode(true);
+  document.body.append(errorElement);
 
-setTimeout(() => {
-  errorElement.remove();
-},REMOVE_MESSAGE_TIMEOUT);
+  setTimeout(() => {
+    errorElement.remove();
+  },REMOVE_MESSAGE_TIMEOUT);
 };
 // Функция взята из интернета и доработана
 // Источник - https://www.freecodecamp.org/news/javascript-debounce-example

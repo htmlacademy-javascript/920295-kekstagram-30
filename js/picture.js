@@ -32,15 +32,14 @@ const renderComments = () => {
   if(commentsCountShown >= comments.length) {
     commentsLoaderElement.classList.add('hidden');
     commentsCountShown = comments.length;
-  }
-  else {
+  } else {
     commentsLoaderElement.classList.remove('hidden');
- }
- const fragment = document.createDocumentFragment();
-  for(let i = 0; i< commentsCountShown; i++) {
-  const comment = createComment(comments[i]);
-  fragment.append(comment);
- }
+  }
+  const fragment = document.createDocumentFragment();
+  for(let i = 0; i < commentsCountShown; i++) {
+    const comment = createComment(comments[i]);
+    fragment.append(comment);
+  }
 
   commentsListElement.innerHTML = '';
   commentsListElement.append(fragment);

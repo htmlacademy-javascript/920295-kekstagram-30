@@ -11,7 +11,9 @@ const errorMessageElement = document
 const hideMessage = () => {
   const existElement = document.querySelector('.success') || document.querySelector('.error');
   existElement.remove();
+  // eslint-disable-next-line no-use-before-define
   document.removeEventListener('keydown', onDocumentKeydown);
+  // eslint-disable-next-line no-use-before-define
   document.body.removeEventListener('click', onBodyClick);
 };
 
